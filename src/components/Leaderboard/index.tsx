@@ -66,7 +66,7 @@ export const Leaderboard: React.FC = () => {
       const params = filter !== "ALL" ? `?gameType=${filter}` : "";
       const response = await apiClient().get(`/stats/leaderboard${params}`);
       const data = JSON.parse(response.data);
-      
+
       if (data.success) {
         setLeaderboard(data.data);
       }
@@ -141,11 +141,13 @@ export const Leaderboard: React.FC = () => {
               $rank={player.rank}
             >
               <RankBadge $rank={player.rank}>
-                {player.rank <= 3 ? (
-                  player.rank === 1 ? "🥇" : player.rank === 2 ? "🥈" : "🥉"
-                ) : (
-                  `#${player.rank}`
-                )}
+                {player.rank <= 3
+                  ? player.rank === 1
+                    ? "🥇"
+                    : player.rank === 2
+                    ? "🥈"
+                    : "🥉"
+                  : `#${player.rank}`}
               </RankBadge>
 
               <PlayerInfo>

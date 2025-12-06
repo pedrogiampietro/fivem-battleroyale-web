@@ -12,7 +12,7 @@ export const LeaderboardHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
-  
+
   h1 {
     font-size: 2.5rem;
     color: #fff;
@@ -29,15 +29,21 @@ export const FilterTab = styled.button<{ $active?: boolean }>`
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
-  background: ${props => props.$active ? 'linear-gradient(135deg, #34b27b 0%, #248a5e 100%)' : 'rgba(255, 255, 255, 0.1)'};
-  color: ${props => props.$active ? '#fff' : '#fff'};
+  background: ${(props) =>
+    props.$active
+      ? "linear-gradient(135deg, #34b27b 0%, #248a5e 100%)"
+      : "rgba(255, 255, 255, 0.1)"};
+  color: ${(props) => (props.$active ? "#fff" : "#fff")};
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
-  
+
   &:hover {
     transform: translateY(-2px);
-    background: ${props => props.$active ? 'linear-gradient(135deg, #3dc98a 0%, #2a9e6a 100%)' : 'rgba(255, 255, 255, 0.2)'};
+    background: ${(props) =>
+      props.$active
+        ? "linear-gradient(135deg, #3dc98a 0%, #2a9e6a 100%)"
+        : "rgba(255, 255, 255, 0.2)"};
   }
 `;
 
@@ -59,21 +65,24 @@ export const TableHeader = styled.div`
   font-size: 0.9rem;
 `;
 
-export const TableRow = styled.div<{ $isCurrentUser?: boolean; $rank?: number }>`
+export const TableRow = styled.div<{
+  $isCurrentUser?: boolean;
+  $rank?: number;
+}>`
   display: grid;
   grid-template-columns: 80px 1fr 100px 100px 100px 100px 120px;
   padding: 15px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   align-items: center;
   transition: all 0.2s ease;
-  background: ${props => {
-    if (props.$isCurrentUser) return 'rgba(52, 178, 123, 0.15)';
-    if (props.$rank === 1) return 'rgba(255, 215, 0, 0.1)';
-    if (props.$rank === 2) return 'rgba(192, 192, 192, 0.1)';
-    if (props.$rank === 3) return 'rgba(205, 127, 50, 0.1)';
-    return 'transparent';
+  background: ${(props) => {
+    if (props.$isCurrentUser) return "rgba(52, 178, 123, 0.15)";
+    if (props.$rank === 1) return "rgba(255, 215, 0, 0.1)";
+    if (props.$rank === 2) return "rgba(192, 192, 192, 0.1)";
+    if (props.$rank === 3) return "rgba(205, 127, 50, 0.1)";
+    return "transparent";
   }};
-  
+
   &:hover {
     background: rgba(255, 255, 255, 0.05);
   }
@@ -88,14 +97,18 @@ export const RankBadge = styled.div<{ $rank: number }>`
   justify-content: center;
   font-weight: bold;
   font-size: 1.1rem;
-  background: ${props => {
-    if (props.$rank === 1) return 'linear-gradient(135deg, #ffd700 0%, #ffaa00 100%)';
-    if (props.$rank === 2) return 'linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%)';
-    if (props.$rank === 3) return 'linear-gradient(135deg, #cd7f32 0%, #a05a20 100%)';
-    return 'rgba(255, 255, 255, 0.1)';
+  background: ${(props) => {
+    if (props.$rank === 1)
+      return "linear-gradient(135deg, #ffd700 0%, #ffaa00 100%)";
+    if (props.$rank === 2)
+      return "linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%)";
+    if (props.$rank === 3)
+      return "linear-gradient(135deg, #cd7f32 0%, #a05a20 100%)";
+    return "rgba(255, 255, 255, 0.1)";
   }};
-  color: ${props => props.$rank <= 3 ? '#000' : '#fff'};
-  box-shadow: ${props => props.$rank <= 3 ? '0 4px 15px rgba(0,0,0,0.3)' : 'none'};
+  color: ${(props) => (props.$rank <= 3 ? "#000" : "#fff")};
+  box-shadow: ${(props) =>
+    props.$rank <= 3 ? "0 4px 15px rgba(0,0,0,0.3)" : "none"};
 `;
 
 export const PlayerInfo = styled.div`
@@ -114,13 +127,13 @@ export const PlayerAvatar = styled.img`
 export const PlayerName = styled.div`
   display: flex;
   flex-direction: column;
-  
+
   .name {
     font-weight: bold;
     color: #fff;
     font-size: 1rem;
   }
-  
+
   .tier {
     font-size: 0.8rem;
     color: #34b27b;
@@ -148,18 +161,26 @@ export const TierBadge = styled.span<{ $tier: string }>`
   border-radius: 12px;
   font-size: 0.75rem;
   font-weight: bold;
-  background: ${props => {
+  background: ${(props) => {
     switch (props.$tier) {
-      case 'CHALLENGER': return 'linear-gradient(135deg, #00ffff 0%, #0088ff 100%)';
-      case 'MASTER': return 'linear-gradient(135deg, #ff00ff 0%, #aa00ff 100%)';
-      case 'DIAMOND': return 'linear-gradient(135deg, #00bfff 0%, #0066ff 100%)';
-      case 'PLATINUM': return 'linear-gradient(135deg, #00ff88 0%, #00aa55 100%)';
-      case 'GOLD': return 'linear-gradient(135deg, #ffd700 0%, #ff9900 100%)';
-      case 'SILVER': return 'linear-gradient(135deg, #c0c0c0 0%, #888888 100%)';
-      default: return 'linear-gradient(135deg, #cd7f32 0%, #8b4513 100%)';
+      case "CHALLENGER":
+        return "linear-gradient(135deg, #00ffff 0%, #0088ff 100%)";
+      case "MASTER":
+        return "linear-gradient(135deg, #ff00ff 0%, #aa00ff 100%)";
+      case "DIAMOND":
+        return "linear-gradient(135deg, #00bfff 0%, #0066ff 100%)";
+      case "PLATINUM":
+        return "linear-gradient(135deg, #00ff88 0%, #00aa55 100%)";
+      case "GOLD":
+        return "linear-gradient(135deg, #ffd700 0%, #ff9900 100%)";
+      case "SILVER":
+        return "linear-gradient(135deg, #c0c0c0 0%, #888888 100%)";
+      default:
+        return "linear-gradient(135deg, #cd7f32 0%, #8b4513 100%)";
     }
   }};
-  color: ${props => ['GOLD', 'SILVER'].includes(props.$tier) ? '#000' : '#fff'};
+  color: ${(props) =>
+    ["GOLD", "SILVER"].includes(props.$tier) ? "#000" : "#fff"};
 `;
 
 export const LoadingContainer = styled.div`
@@ -175,12 +196,12 @@ export const EmptyState = styled.div`
   text-align: center;
   padding: 60px;
   color: rgba(255, 255, 255, 0.5);
-  
+
   h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
   }
-  
+
   p {
     font-size: 1rem;
   }

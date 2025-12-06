@@ -12,7 +12,11 @@ export const StatsContainer = styled.div`
 export const CardHeader = styled.div`
   position: relative;
   padding: 30px 20px;
-  background: linear-gradient(135deg, rgba(52, 178, 123, 0.2) 0%, rgba(36, 138, 94, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(52, 178, 123, 0.2) 0%,
+    rgba(36, 138, 94, 0.1) 100%
+  );
   text-align: center;
 `;
 
@@ -37,15 +41,22 @@ export const TierBadge = styled.div<{ $tier: string }>`
   border-radius: 12px;
   font-size: 0.7rem;
   font-weight: bold;
-  background: ${props => {
+  background: ${(props) => {
     switch (props.$tier) {
-      case 'CHALLENGER': return 'linear-gradient(135deg, #00ffff 0%, #0088ff 100%)';
-      case 'MASTER': return 'linear-gradient(135deg, #ff00ff 0%, #aa00ff 100%)';
-      case 'DIAMOND': return 'linear-gradient(135deg, #00bfff 0%, #0066ff 100%)';
-      case 'PLATINUM': return 'linear-gradient(135deg, #00ff88 0%, #00aa55 100%)';
-      case 'GOLD': return 'linear-gradient(135deg, #ffd700 0%, #ff9900 100%)';
-      case 'SILVER': return 'linear-gradient(135deg, #c0c0c0 0%, #888888 100%)';
-      default: return 'linear-gradient(135deg, #cd7f32 0%, #8b4513 100%)';
+      case "CHALLENGER":
+        return "linear-gradient(135deg, #00ffff 0%, #0088ff 100%)";
+      case "MASTER":
+        return "linear-gradient(135deg, #ff00ff 0%, #aa00ff 100%)";
+      case "DIAMOND":
+        return "linear-gradient(135deg, #00bfff 0%, #0066ff 100%)";
+      case "PLATINUM":
+        return "linear-gradient(135deg, #00ff88 0%, #00aa55 100%)";
+      case "GOLD":
+        return "linear-gradient(135deg, #ffd700 0%, #ff9900 100%)";
+      case "SILVER":
+        return "linear-gradient(135deg, #c0c0c0 0%, #888888 100%)";
+      default:
+        return "linear-gradient(135deg, #cd7f32 0%, #8b4513 100%)";
     }
   }};
   color: #fff;
@@ -72,14 +83,14 @@ export const MMRDisplay = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 15px;
-  
+
   .mmr-value {
     font-size: 2.5rem;
     font-weight: bold;
     color: #34b27b;
     text-shadow: 0 0 10px rgba(52, 178, 123, 0.5);
   }
-  
+
   .mmr-label {
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.6);
@@ -100,13 +111,13 @@ export const StatBox = styled.div`
   background: rgba(0, 0, 0, 0.5);
   padding: 20px;
   text-align: center;
-  
+
   .value {
     font-size: 1.8rem;
     font-weight: bold;
     color: #fff;
   }
-  
+
   .label {
     font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.6);
@@ -137,7 +148,7 @@ export const ProgressBar = styled.div`
 
 export const ProgressFill = styled.div<{ $percent: number }>`
   height: 100%;
-  width: ${props => props.$percent}%;
+  width: ${(props) => props.$percent}%;
   background: linear-gradient(90deg, #34b27b 0%, #248a5e 100%);
   border-radius: 4px;
   transition: width 0.5s ease;
@@ -146,7 +157,7 @@ export const ProgressFill = styled.div<{ $percent: number }>`
 export const RecentMatches = styled.div`
   padding: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  
+
   h3 {
     font-size: 1rem;
     color: #fff;
@@ -163,42 +174,41 @@ export const MatchItem = styled.div<{ $won: boolean }>`
   justify-content: space-between;
   padding: 12px;
   margin-bottom: 8px;
-  background: ${props => props.$won 
-    ? 'rgba(52, 178, 123, 0.15)' 
-    : 'rgba(244, 67, 54, 0.15)'};
+  background: ${(props) =>
+    props.$won ? "rgba(52, 178, 123, 0.15)" : "rgba(244, 67, 54, 0.15)"};
   border-radius: 8px;
-  border-left: 3px solid ${props => props.$won ? '#34b27b' : '#f44336'};
-  
+  border-left: 3px solid ${(props) => (props.$won ? "#34b27b" : "#f44336")};
+
   .match-info {
     display: flex;
     flex-direction: column;
     gap: 3px;
-    
+
     .game-type {
       font-size: 0.85rem;
       color: #fff;
       font-weight: 500;
     }
-    
+
     .date {
       font-size: 0.75rem;
       color: rgba(255, 255, 255, 0.5);
     }
   }
-  
+
   .match-stats {
     display: flex;
     gap: 15px;
-    
+
     .stat {
       text-align: center;
-      
+
       .value {
         font-size: 1rem;
         font-weight: bold;
         color: #fff;
       }
-      
+
       .label {
         font-size: 0.65rem;
         color: rgba(255, 255, 255, 0.5);
@@ -206,11 +216,11 @@ export const MatchItem = styled.div<{ $won: boolean }>`
       }
     }
   }
-  
+
   .placement {
     font-size: 1.2rem;
     font-weight: bold;
-    color: ${props => props.$won ? '#34b27b' : '#f44336'};
+    color: ${(props) => (props.$won ? "#34b27b" : "#f44336")};
     min-width: 45px;
     text-align: center;
   }

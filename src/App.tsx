@@ -62,7 +62,7 @@ const App = () => {
           <SteamLoginButton onSuccess={handleSteamLoginSuccess} />
         )}
       </S.CenteredContainer>
-      
+
       {/* Modal de partida encontrada - aparece sobre tudo */}
       <MatchFound />
     </>

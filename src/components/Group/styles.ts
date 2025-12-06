@@ -1,243 +1,295 @@
-import styled, { css } from 'styled-components';
-import { FiSearch } from 'react-icons/fi';
-import { FaCrown } from 'react-icons/fa';
+import styled, { css } from "styled-components";
+import { FiSearch } from "react-icons/fi";
+import { FaCrown } from "react-icons/fa";
 
 export interface StatusButtonProps
-	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-	$playerReady: boolean;
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  $playerReady: boolean;
 }
 interface CollapseWrapperProps {
-	$isOpen: boolean;
+  $isOpen: boolean;
 }
 
 export const GroupSection = styled.section`
-	position: relative;
-	background: #11181c;
-	border-top: 1px solid #34b27b;
-	border-radius: 5px;
-	padding: 0.9375rem 1.875rem 1.5625rem;
-	margin-top: 33px;
-	margin-bottom: 64px;
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 `;
 
 export const InnerGroupSection = styled.section`
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 2rem;
-	margin-top: 1rem;
-
-	@media (max-width: 1024px) {
-		grid-template-columns: repeat(3, 1fr);
-	}
-
-	@media (max-width: 768px) {
-		grid-template-columns: repeat(2, 1fr);
-	}
-
-	@media (max-width: 480px) {
-		grid-template-columns: 1fr;
-	}
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
 `;
 
 export const PlayerBox = styled.div`
-	background: linear-gradient(
-		274.68deg,
-		rgba(52, 178, 123, 0.25) 5.83%,
-		#248a5e 72.5%,
-		#34b27b 98.7%
-	);
-	border-radius: 0.625rem;
-	height: 3.875rem;
-	width: 16.125rem;
-	padding: 1rem;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(52, 178, 123, 0.1) 0%,
+    rgba(52, 178, 123, 0.2) 100%
+  );
+  border: 1px solid rgba(52, 178, 123, 0.3);
+  border-radius: 12px;
+  height: 4.5rem;
+  width: 100%;
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(52, 178, 123, 0.15) 0%,
+      rgba(52, 178, 123, 0.25) 100%
+    );
+    border-color: var(--primary);
+    box-shadow: 0 0 15px var(--primary-glow);
+  }
 `;
 
 export const Avatar = styled.img`
-	width: 30px;
-	height: 30px;
-	border-radius: 50%;
-	margin-right: 0.75rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 1rem;
+  border: 2px solid var(--primary);
 `;
 
 export const CrownIcon = styled(FaCrown)`
-	color: #ffd700;
-	margin-left: 5px;
+  color: #ffd700;
+  margin-left: 8px;
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
 `;
 
 export const AddPlayerBox = styled(PlayerBox)`
-	background: rgba(54, 54, 59, 0.25);
-	justify-content: center;
-	cursor: pointer;
+  background: transparent;
+  border: 2px dashed var(--border-color);
+  justify-content: center;
+  cursor: pointer;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: var(--text-muted);
+    box-shadow: none;
+  }
 `;
 
 export const StatusButton = styled.button<StatusButtonProps>`
-	background: ${(props) =>
-		props.$playerReady ? 'rgb(0, 255, 0)' : 'rgb(113, 113, 122)'};
-	color: rgb(255, 255, 255);
-	border-radius: 5px;
-	display: flex;
-	align-items: center;
-	gap: 4px;
-	border: none;
-	font-size: 0.75rem;
-	padding: 2px 6px;
-	transition: all 0.4s ease 0s;
+  background: ${(props) =>
+    props.$playerReady ? "var(--primary)" : "var(--bg-dark)"};
+  color: ${(props) =>
+    props.$playerReady ? "#fff" : "var(--text-muted)"};
+  border: 1px solid ${(props) =>
+    props.$playerReady ? "transparent" : "var(--border-color)"};
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  text-transform: uppercase;
 
-	&:hover {
-		background: rgb(0, 255, 0);
-		cursor: pointer;
-	}
+  &:hover {
+    background: ${(props) =>
+      props.$playerReady ? "#2ea06d" : "var(--border-color)"};
+    color: #fff;
+  }
 `;
 
 export const InviteIcon = styled.div`
-	/* Replace this with the actual SVG for your plus icon */
+  /* Replace this with the actual SVG for your plus icon */
 `;
 
 export const CardContainer = styled.div`
-	display: grid;
-	grid-template-rows: auto auto;
-	gap: 0.5rem;
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 0.5rem;
 `;
 
 export const CollapseWrapper = styled.div<CollapseWrapperProps>`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 1rem;
-	gap: 10px;
-	grid-column: 1 / -1;
-	overflow: hidden;
-	transition: height 0.3s ease-in-out;
-	width: 280px;
-	height: 160px;
-	background-color: rgba(17, 24, 28, 0.98);
-	border: 1px solid rgba(52, 178, 123, 0.2);
-	border-radius: 10px;
-	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
-	${(props) =>
-		props.$isOpen &&
-		css`
-			height: auto;
-		`}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  gap: 1rem;
+  grid-column: 1 / -1;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  
+  ${(props) =>
+    props.$isOpen &&
+    css`
+      height: auto;
+      opacity: 1;
+      transform: translateY(0);
+    `}
+    
+  ${(props) =>
+    !props.$isOpen &&
+    css`
+      height: 0;
+      opacity: 0;
+      padding: 0;
+      border: none;
+      transform: translateY(-10px);
+    `}
 `;
 
 export const SearchPlayersContent = styled.div`
-	padding: 1rem;
-	border-radius: 5px;
-	margin-top: 0.5rem;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-	gap: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 export const HeaderContent = styled.header`
-	font-weight: bold;
-	font-size: 1.2rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--text-main);
+  text-align: center;
 `;
 
 export const DescriptionText = styled.p`
-	font-size: 1rem;
-	color: #999;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-align: center;
 `;
 
 export const SearchBox = styled.div`
-	width: 100%;
-	height: 1.625rem;
-	background: rgb(63, 63, 70);
-	border: 0.5px solid rgb(113, 113, 122);
-	box-shadow: rgba(4, 4, 3, 0.2) 0px 3px 5px, rgba(4, 4, 3, 0.31) 0px 0px 1px;
-	border-radius: 5px;
-	display: flex;
-	align-items: center;
-	overflow: hidden;
-	margin: 1rem 0px;
+  width: 100%;
+  height: 2.5rem;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  transition: all 0.2s ease;
+
+  &:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--primary-glow);
+  }
 `;
 
 export const SearchInput = styled.input`
-	padding: 0.5rem;
-	flex-grow: 1;
-	border: none;
-	outline: none;
-	background: transparent;
-	color: rgb(250, 250, 250);
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+
+  &::placeholder {
+    color: var(--text-muted);
+  }
 `;
+
 export const SearchIcon = styled(FiSearch)`
-	margin-right: 0.5rem;
+  margin-right: 0.75rem;
+  color: var(--text-muted);
 `;
 
 export const FriendsSection = styled.section`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
 `;
 
 export const NoResultText = styled.p`
-	font-size: 0.9rem;
-	color: #777;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 1rem;
 `;
 
 export const Friend = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 10px 15px;
-	border: 1px solid rgba(52, 178, 123, 0.2);
-	border-radius: 5px;
-	margin-bottom: 10px;
-	background-color: #1a2329;
-	cursor: pointer;
-	transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg-dark);
+  cursor: pointer;
+  transition: all 0.2s ease;
 
-	&:hover {
-		background-color: #243038;
-	}
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: var(--text-muted);
+  }
 `;
 
 export const InviteButton = styled.button`
-	background-color: #34b27b;
-	color: #fff;
-	border: none;
-	border-radius: 5px;
-	padding: 5px 10px;
-	font-size: 0.9rem;
-	cursor: pointer;
-	transition: background-color 0.2s;
-	margin: 0 1rem;
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 
-	&:hover {
-		background-color: #248a5e;
-	}
+  &:hover {
+    background-color: #2ea06d;
+    box-shadow: 0 0 10px var(--primary-glow);
+  }
 
-	&:disabled {
-		background-color: rgba(52, 178, 123, 0.4);
-		cursor: not-allowed;
-	}
+  &:disabled {
+    background-color: var(--border-color);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    box-shadow: none;
+  }
 `;
 
 export const RemoveButton = styled.button`
-	background-color: #f44336; // A red shade for removal actions
-	color: #ffffff; // White text color
-	border: none;
-	border-radius: 5px;
-	padding: 5px 10px;
-	font-size: 0.9rem;
-	cursor: pointer;
-	transition: background-color 0.2s;
-	margin: 0 1rem;
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 
-	&:hover {
-		background-color: #d32f2f; // Darker shade of red on hover
-	}
+  &:hover {
+    background-color: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+  }
 
-	&:disabled {
-		background-color: #ef9a9a; // Lighter shade of red for disabled state
-		cursor: not-allowed;
-	}
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;

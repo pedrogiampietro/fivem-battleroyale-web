@@ -32,19 +32,19 @@ export const MenuContainer = ({ userData }: any) => {
   return (
     <>
       <S.MenuContainer>
-        <S.MenuItem className="is-current" href="#home">
+        <S.MenuItem className="is-current" href="#home" data-tooltip="Início">
           <FaHome />
         </S.MenuItem>
-        <S.MenuItem href="#matchmaking">
+        <S.MenuItem href="#matchmaking" data-tooltip="Partidas">
           <FaLink />
         </S.MenuItem>
-        <S.MenuItem href="#inventario">
+        <S.MenuItem href="#inventario" data-tooltip="Inventário">
           <FaInbox />
         </S.MenuItem>
-        <S.MenuItem href="#aparencia">
+        <S.MenuItem href="#aparencia" data-tooltip="Aparência">
           <FaWpforms />
         </S.MenuItem>
-        <S.MenuItem href="#loja">
+        <S.MenuItem href="#loja" data-tooltip="Loja">
           <FaShoppingBag />
         </S.MenuItem>
       </S.MenuContainer>

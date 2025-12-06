@@ -50,7 +50,7 @@ export const MatchmakingProvider: React.FC<PropsI> = ({ children }) => {
   const connectToServer = useCallback(() => {
     const serverUrl = FIVEM_CONFIG.connectionUrl;
     console.log("Conectando ao servidor FiveM:", serverUrl);
-    
+
     // Abre o FiveM com o protocolo fivem://
     window.location.href = serverUrl;
   }, []);

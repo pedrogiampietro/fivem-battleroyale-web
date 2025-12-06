@@ -75,7 +75,7 @@ export const PlayerStats: React.FC<PlayerStatsProps> = ({ userId }) => {
     setLoading(true);
     try {
       let targetUserId = userId;
-      
+
       if (!targetUserId) {
         const userData = localStorage.getItem("userData");
         if (userData) {
@@ -91,7 +91,7 @@ export const PlayerStats: React.FC<PlayerStatsProps> = ({ userId }) => {
 
       const response = await apiClient().get(`/stats/player/${targetUserId}`);
       const data = JSON.parse(response.data);
-      
+
       if (data.success) {
         setStats(data.data);
       }
@@ -215,7 +215,9 @@ export const PlayerStats: React.FC<PlayerStatsProps> = ({ userId }) => {
             <MatchItem key={match.id} $won={match.placement === 1}>
               <div className="match-info">
                 <span className="game-type">{match.match.gameType}</span>
-                <span className="date">{formatDate(match.match.createdAt)}</span>
+                <span className="date">
+                  {formatDate(match.match.createdAt)}
+                </span>
               </div>
               <div className="match-stats">
                 <div className="stat">

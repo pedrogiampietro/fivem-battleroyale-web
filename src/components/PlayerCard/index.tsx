@@ -1,6 +1,7 @@
 import React from "react";
 import { useMatchmaking } from "../../contexts/MatchmakingContext";
 import { GameType } from "../../enums/GameType";
+import { FaUsers, FaUserFriends, FaUser, FaGamepad, FaClock } from "react-icons/fa";
 
 import soloImg from "../../assets/imgs/br-solo.webp";
 import duoImg from "../../assets/imgs/br-duo.webp";
@@ -11,25 +12,31 @@ import { toast } from "../../lib/toast";
 
 const matchmakings = [
   {
-    type: "Squad Matchmaking",
+    type: "Squad",
     total: 64,
     size: 4,
     img: squadImg,
     gameType: GameType.SQUAD,
+    icon: <FaUsers />,
+    description: "Junte-se a 3 amigos e domine a ilha."
   },
   {
-    type: "Duo Matchmaking",
+    type: "Duo",
     total: 64,
     size: 2,
     img: duoImg,
     gameType: GameType.DUO,
+    icon: <FaUserFriends />,
+    description: "Trabalhe em dupla para sobreviver."
   },
   {
-    type: "Solo Matchmaking",
+    type: "Solo",
     total: 64,
     size: 1,
     img: soloImg,
     gameType: GameType.SOLO,
+    icon: <FaUser />,
+    description: "É cada um por si. Sobreviva a todos."
   },
 ];
 
@@ -63,44 +70,60 @@ export const PlayerCard = () => {
 
   return (
     <S.CardContainer>
-      {matchmakings.map((matchmaking, i) => (
-        <S.Card key={i}>
-          <S.CardImage src={matchmaking.img} alt={matchmaking.type} />
-          <S.MatchmakingTitle>{matchmaking.type}</S.MatchmakingTitle>
+      {matchmakings.map((matchmaking, i) => {
+        const isSearching = isFindingMatch && currentFindingGameType === matchmaking.gameType;
+        
+        return (
+          <S.Card key={i} $isSearching={isSearching}>
+            <S.CardHeader>
+              <S.CardImage src={matchmaking.img} alt={matchmaking.type} />
+              <S.ModeBadge>
+                {matchmaking.icon}
+                {matchmaking.type}
+              </S.ModeBadge>
+            </S.CardHeader>
 
-          <S.MatchmakingInfo>
-            <S.InfoPair>
-              <S.InfoLabel>Total</S.InfoLabel>
-              <S.InfoData>{matchmaking.total} Jogadores</S.InfoData>
-            </S.InfoPair>
-            <S.InfoPair>
-              <S.InfoLabel>Jogadores na fila</S.InfoLabel>
-              <S.InfoData>
-                {matchmakingCounters[matchmaking.gameType]}
-              </S.InfoData>
-            </S.InfoPair>
-            <S.InfoPair>
-              <S.InfoLabel>Tamanho do time</S.InfoLabel>
-              <S.InfoData>{matchmaking.size} Pessoas</S.InfoData>
-            </S.InfoPair>
-            <S.Button
-              disabled={
-                loading ||
-                (isFindingMatch &&
-                  currentFindingGameType !== matchmaking.gameType)
-              }
-              onClick={() => handleMatchmaking(matchmaking.gameType)}
-            >
-              {loading
-                ? "Loading..."
-                : isFindingMatch &&
-                  currentFindingGameType === matchmaking.gameType
-                ? "Cancelar Busca"
-                : "Buscar Partida"}
-            </S.Button>
-          </S.MatchmakingInfo>
-        </S.Card>
-      ))}
+            <S.CardContent>
+              <S.Description>{matchmaking.description}</S.Description>
+              
+              <S.StatsGrid>
+                <S.StatBox>
+                  <S.StatLabel><FaGamepad /> Total</S.StatLabel>
+                  <S.StatValue>{matchmaking.total}</S.StatValue>
+                </S.StatBox>
+                <S.StatBox>
+                  <S.StatLabel><FaClock /> Fila</S.StatLabel>
+                  <S.StatValue>
+                    {matchmakingCounters[matchmaking.gameType] || 0}
+                  </S.StatValue>
+                </S.StatBox>
+                <S.StatBox>
+                  <S.StatLabel><FaUsers /> Time</S.StatLabel>
+                  <S.StatValue>{matchmaking.size}</S.StatValue>
+                </S.StatBox>
+              </S.StatsGrid>
+
+              <S.Button
+                disabled={
+                  loading ||
+                  (isFindingMatch &&
+                    currentFindingGameType !== matchmaking.gameType)
+                }
+                $isSearching={isSearching}
+                onClick={() => handleMatchmaking(matchmaking.gameType)}
+              >
+                {loading ? (
+                  "Carregando..."
+                ) : isSearching ? (
+                  <>Cancelar Busca <span className="loader">...</span></>
+                ) : (
+                  "Buscar Partida"
+                )}
+              </S.Button>
+            </S.CardContent>
+          </S.Card>
+        );
+      })}
     </S.CardContainer>
   );
 };
