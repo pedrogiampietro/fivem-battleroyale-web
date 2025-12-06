@@ -12,8 +12,8 @@ interface CollapseWrapperProps {
 
 export const GroupSection = styled.section`
 	position: relative;
-	background: rgb(39, 39, 42);
-	border-top: 1px solid rgb(120, 45, 248);
+	background: #11181c;
+	border-top: 1px solid #34b27b;
 	border-radius: 5px;
 	padding: 0.9375rem 1.875rem 1.5625rem;
 	margin-top: 33px;
@@ -42,9 +42,9 @@ export const InnerGroupSection = styled.section`
 export const PlayerBox = styled.div`
 	background: linear-gradient(
 		274.68deg,
-		rgba(123, 47, 253, 0.25) 5.83%,
-		rgb(89, 41, 172) 72.5%,
-		rgb(123, 47, 253) 98.7%
+		rgba(52, 178, 123, 0.25) 5.83%,
+		#248a5e 72.5%,
+		#34b27b 98.7%
 	);
 	border-radius: 0.625rem;
 	height: 3.875rem;
@@ -114,10 +114,10 @@ export const CollapseWrapper = styled.div<CollapseWrapperProps>`
 	transition: height 0.3s ease-in-out;
 	width: 280px;
 	height: 160px;
-	background-color: rgba(27, 30, 34, 0.98);
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	background-color: rgba(17, 24, 28, 0.98);
+	border: 1px solid rgba(52, 178, 123, 0.2);
 	border-radius: 10px;
-	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
 	${(props) =>
 		props.$isOpen &&
 		css`
@@ -188,21 +188,21 @@ export const Friend = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	padding: 10px 15px;
-	border: 1px solid #e0e0e0;
+	border: 1px solid rgba(52, 178, 123, 0.2);
 	border-radius: 5px;
 	margin-bottom: 10px;
-	background-color: #3f3f46;
+	background-color: #1a2329;
 	cursor: pointer;
 	transition: background-color 0.2s;
 
 	&:hover {
-		background-color: #e9e9e9;
+		background-color: #243038;
 	}
 `;
 
 export const InviteButton = styled.button`
-	background-color: #4caf50;
-	color: #0000;
+	background-color: #34b27b;
+	color: #fff;
 	border: none;
 	border-radius: 5px;
 	padding: 5px 10px;
@@ -212,11 +212,11 @@ export const InviteButton = styled.button`
 	margin: 0 1rem;
 
 	&:hover {
-		background-color: #45a049;
+		background-color: #248a5e;
 	}
 
 	&:disabled {
-		background-color: #b2dfdb;
+		background-color: rgba(52, 178, 123, 0.4);
 		cursor: not-allowed;
 	}
 `;

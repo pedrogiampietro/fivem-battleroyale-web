@@ -17,10 +17,10 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 				gutter={8}
 				toastOptions={{
 					style: {
-						background: '#5a5a5a',
+						background: '#11181c',
 						color: '#f5f5f5',
 						borderRadius: '4px',
-						border: '1px solid #4a4a4a',
+						border: '1px solid rgba(52, 178, 123, 0.3)',
 						padding: '16px',
 						fontSize: '14px',
 					},

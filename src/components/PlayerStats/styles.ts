@@ -3,16 +3,16 @@ import styled from "styled-components";
 export const StatsContainer = styled.div`
   width: 100%;
   max-width: 400px;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(17, 24, 28, 0.9);
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(52, 178, 123, 0.2);
 `;
 
 export const CardHeader = styled.div`
   position: relative;
   padding: 30px 20px;
-  background: linear-gradient(135deg, rgba(255, 200, 0, 0.2) 0%, rgba(255, 100, 0, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(52, 178, 123, 0.2) 0%, rgba(36, 138, 94, 0.1) 100%);
   text-align: center;
 `;
 
@@ -25,8 +25,8 @@ export const Avatar = styled.img`
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 4px solid #ffc107;
-  box-shadow: 0 0 20px rgba(255, 193, 7, 0.4);
+  border: 4px solid #34b27b;
+  box-shadow: 0 0 20px rgba(52, 178, 123, 0.4);
 `;
 
 export const TierBadge = styled.div<{ $tier: string }>`
@@ -63,7 +63,7 @@ export const RankInfo = styled.div`
   align-items: center;
   justify-content: center;
   gap: 10px;
-  color: #ffc107;
+  color: #34b27b;
   font-size: 0.9rem;
 `;
 
@@ -76,8 +76,8 @@ export const MMRDisplay = styled.div`
   .mmr-value {
     font-size: 2.5rem;
     font-weight: bold;
-    color: #ffc107;
-    text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+    color: #34b27b;
+    text-shadow: 0 0 10px rgba(52, 178, 123, 0.5);
   }
   
   .mmr-label {
@@ -138,7 +138,7 @@ export const ProgressBar = styled.div`
 export const ProgressFill = styled.div<{ $percent: number }>`
   height: 100%;
   width: ${props => props.$percent}%;
-  background: linear-gradient(90deg, #ffc107 0%, #ff9800 100%);
+  background: linear-gradient(90deg, #34b27b 0%, #248a5e 100%);
   border-radius: 4px;
   transition: width 0.5s ease;
 `;
@@ -164,10 +164,10 @@ export const MatchItem = styled.div<{ $won: boolean }>`
   padding: 12px;
   margin-bottom: 8px;
   background: ${props => props.$won 
-    ? 'rgba(76, 175, 80, 0.15)' 
+    ? 'rgba(52, 178, 123, 0.15)' 
     : 'rgba(244, 67, 54, 0.15)'};
   border-radius: 8px;
-  border-left: 3px solid ${props => props.$won ? '#4caf50' : '#f44336'};
+  border-left: 3px solid ${props => props.$won ? '#34b27b' : '#f44336'};
   
   .match-info {
     display: flex;
@@ -210,7 +210,7 @@ export const MatchItem = styled.div<{ $won: boolean }>`
   .placement {
     font-size: 1.2rem;
     font-weight: bold;
-    color: ${props => props.$won ? '#4caf50' : '#f44336'};
+    color: ${props => props.$won ? '#34b27b' : '#f44336'};
     min-width: 45px;
     text-align: center;
   }

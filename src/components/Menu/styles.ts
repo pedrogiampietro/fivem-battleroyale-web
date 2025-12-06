@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const MenuContainer = styled.div`
-	background: rgba(27, 30, 34, 0.98);
+	background: rgba(17, 24, 28, 0.98);
 	backdrop-filter: blur(5px);
 	border-radius: 5px;
 	display: flex;
@@ -24,8 +24,8 @@ export const MenuItem = styled.a`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: rgb(37, 41, 45);
-	color: rgb(54, 59, 65);
+	background: #1a2329;
+	color: #4a5568;
 	transition: all 0.4s ease 0s;
 	border: none;
 	cursor: pointer;
@@ -34,7 +34,7 @@ export const MenuItem = styled.a`
 	text-decoration: none;
 
 	&:hover {
-		color: rgb(123, 47, 253);
+		color: #34b27b;
 
 		&::after {
 			content: attr(href);
@@ -50,8 +50,8 @@ export const MenuItem = styled.a`
 		color: rgb(250, 250, 250);
 		background: linear-gradient(
 			91.48deg,
-			rgb(123, 47, 253) 0%,
-			rgb(79, 18, 184) 100%
+			#34b27b 0%,
+			#248a5e 100%
 		);
 	}
 
@@ -62,7 +62,7 @@ export const MenuItem = styled.a`
 `;
 
 export const AvatarCardContainer = styled.div`
-	background: rgba(27, 30, 34, 0.98);
+	background: rgba(17, 24, 28, 0.98);
 	backdrop-filter: blur(5px);
 	border-radius: 5px;
 	display: flex;
@@ -128,7 +128,7 @@ export const LogoutButton = styled.button`
 	}
 
 	&:hover {
-		color: rgb(123, 47, 253);
+		color: #34b27b;
 		&::before {
 			background-color: rgba(0, 0, 0, 0.6);
 		}
@@ -140,7 +140,7 @@ export const LogoutButton = styled.button`
 `;
 
 export const GroupRequestCard = styled.div`
-	background: rgba(27, 30, 34, 0.98);
+	background: rgba(17, 24, 28, 0.98);
 	backdrop-filter: blur(5px);
 	border-radius: 5px;
 	display: flex;
@@ -168,14 +168,14 @@ export const GroupRequestItem = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
-	background: rgb(37, 41, 45);
-	color: rgb(54, 59, 65);
+	background: #1a2329;
+	color: #4a5568;
 	transition: all 0.4s ease 0s;
 	border-radius: 5px;
 	margin-bottom: 10px;
 
 	&:hover {
-		color: rgb(123, 47, 253);
+		color: #34b27b;
 	}
 
 	span {
@@ -191,7 +191,7 @@ export const GroupRequestItem = styled.div`
 `;
 
 export const AcceptButton = styled.button`
-	background-color: #4caf50;
+	background-color: #34b27b;
 	border: none;
 	border-radius: 50%;
 	width: 24px;
@@ -203,7 +203,7 @@ export const AcceptButton = styled.button`
 	cursor: pointer;
 
 	&:hover {
-		background-color: #45a049;
+		background-color: #248a5e;
 	}
 `;
 

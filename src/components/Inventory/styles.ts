@@ -5,8 +5,8 @@ interface TabProps {
 }
 export const GroupSection = styled.section`
 	position: relative;
-	background: rgb(39, 39, 42);
-	border-top: 1px solid rgb(120, 45, 248);
+	background: #11181c;
+	border-top: 1px solid #34b27b;
 	border-radius: 5px;
 	padding: 0.9375rem 1.875rem 1.5625rem;
 	margin-top: 33px;
@@ -26,8 +26,8 @@ export const Tab = styled.button<TabProps>`
 	font-size: 0.75rem;
 	background: ${(props) =>
 		props.$isActive
-			? 'linear-gradient(91.48deg, rgb(123, 47, 253) 0%, rgb(79, 18, 184) 100%)'
-			: '#1c1c1e'};
+			? 'linear-gradient(91.48deg, #34b27b 0%, #248a5e 100%)'
+			: '#11181c'};
 	border-radius: 5px 5px 0px 0px;
 	margin: 5px;
 	width: auto;
@@ -38,8 +38,8 @@ export const Tab = styled.button<TabProps>`
 	&:hover {
 		background: ${(props) =>
 			props.$isActive
-				? 'linear-gradient(91.48deg, rgb(143, 67, 253) 0%, rgb(119, 38, 194) 100%)'
-				: '#1c1c1e'};
+				? 'linear-gradient(91.48deg, #3dc98a 0%, #2a9e6a 100%)'
+				: '#1a2329'};
 	}
 `;
 
@@ -67,8 +67,8 @@ export const InventoryGrid = styled.div`
 `;
 
 export const InventorySlot = styled.div`
-	background: #2d2d30;
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	background: #1a2329;
+	border: 1px solid rgba(52, 178, 123, 0.15);
 	padding: 10px;
 	height: 100px;
 	display: flex;

@@ -57,7 +57,7 @@ export const MenuContainer = ({ userData }: any) => {
 
           <S.LogoutButton onClick={() => signOut()}>
             <S.LogoutIconContainer>
-              <FiLogOut size={24} color="#5e39cc" />
+              <FiLogOut size={24} color="#34b27b" />
             </S.LogoutIconContainer>
           </S.LogoutButton>
         </S.AvatarCardContainer>

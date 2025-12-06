@@ -17,9 +17,24 @@ export const CenteredContainer = styled.div`
 
 export const Banner = styled.div<BannerProps>`
 	width: 100%;
-	height: 53.3125rem;
+	height: 45rem;
 	position: relative;
-	background: linear-gradient(360deg, rgb(24, 24, 27) 5%, rgba(0, 0, 0, 0) 100%)
-			0% 0% / cover,
-		url(${(props) => props.background}) center center no-repeat;
+	background: 
+		linear-gradient(360deg, #11181c 0%, rgba(17, 24, 28, 0.8) 15%, rgba(0, 0, 0, 0) 50%),
+		url(${(props) => props.background});
+	background-size: cover;
+	background-position: center top;
+	background-repeat: no-repeat;
+	
+	@media (max-width: 1400px) {
+		height: 38rem;
+	}
+	
+	@media (max-width: 1024px) {
+		height: 32rem;
+	}
+	
+	@media (max-width: 768px) {
+		height: 25rem;
+	}
 `;

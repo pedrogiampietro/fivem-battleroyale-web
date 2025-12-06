@@ -8,9 +8,9 @@ export const CardContainer = styled.div`
 `;
 
 export const Card = styled.div`
-	background: #27272a;
+	background: #11181c;
 	border-radius: 5px;
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(52, 178, 123, 0.2);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -29,8 +29,8 @@ export const Card = styled.div`
 		border-radius: 6px;
 		background: linear-gradient(
 			181.46deg,
-			rgba(82, 82, 91, 0) 63.79%,
-			rgb(63, 63, 70) 98.78%
+			rgba(52, 178, 123, 0) 63.79%,
+			rgba(52, 178, 123, 0.3) 98.78%
 		);
 	}
 `;
@@ -82,8 +82,8 @@ export const Button = styled.button`
 	transition: all 0.4s ease 0s;
 	background: linear-gradient(
 		91.48deg,
-		rgb(123, 47, 253) 0%,
-		rgb(79, 18, 184) 100%
+		#34b27b 0%,
+		#248a5e 100%
 	);
 	font-size: 0.75rem;
 	padding: 0.6rem 0.5rem;
@@ -95,22 +95,22 @@ export const Button = styled.button`
 	&:hover {
 		background: linear-gradient(
 			91.48deg,
-			rgb(139, 47, 253) 0%,
-			rgb(95, 18, 184) 100%
+			#3dc98a 0%,
+			#2a9e6a 100%
 		);
 	}
 
 	&:disabled {
 		cursor: not-allowed;
 		opacity: 0.6;
-		background: rgba(79, 18, 184, 0.6);
+		background: rgba(36, 138, 94, 0.6);
 	}
 
 	&:hover:enabled {
 		background: linear-gradient(
 			91.48deg,
-			rgb(139, 47, 253) 0%,
-			rgb(95, 18, 184) 100%
+			#3dc98a 0%,
+			#2a9e6a 100%
 		);
 	}
 `;

@@ -16,7 +16,7 @@ export const LeaderboardHeader = styled.div`
   h1 {
     font-size: 2.5rem;
     color: #fff;
-    text-shadow: 0 0 10px rgba(255, 200, 0, 0.5);
+    text-shadow: 0 0 10px rgba(52, 178, 123, 0.5);
   }
 `;
 
@@ -29,33 +29,33 @@ export const FilterTab = styled.button<{ $active?: boolean }>`
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
-  background: ${props => props.$active ? 'linear-gradient(135deg, #ffc107 0%, #ff9800 100%)' : 'rgba(255, 255, 255, 0.1)'};
-  color: ${props => props.$active ? '#000' : '#fff'};
+  background: ${props => props.$active ? 'linear-gradient(135deg, #34b27b 0%, #248a5e 100%)' : 'rgba(255, 255, 255, 0.1)'};
+  color: ${props => props.$active ? '#fff' : '#fff'};
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
   
   &:hover {
     transform: translateY(-2px);
-    background: ${props => props.$active ? 'linear-gradient(135deg, #ffc107 0%, #ff9800 100%)' : 'rgba(255, 255, 255, 0.2)'};
+    background: ${props => props.$active ? 'linear-gradient(135deg, #3dc98a 0%, #2a9e6a 100%)' : 'rgba(255, 255, 255, 0.2)'};
   }
 `;
 
 export const LeaderboardTable = styled.div`
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(17, 24, 28, 0.8);
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(52, 178, 123, 0.2);
 `;
 
 export const TableHeader = styled.div`
   display: grid;
   grid-template-columns: 80px 1fr 100px 100px 100px 100px 120px;
   padding: 15px 20px;
-  background: rgba(255, 200, 0, 0.1);
-  border-bottom: 1px solid rgba(255, 200, 0, 0.3);
+  background: rgba(52, 178, 123, 0.1);
+  border-bottom: 1px solid rgba(52, 178, 123, 0.3);
   font-weight: bold;
-  color: #ffc107;
+  color: #34b27b;
   font-size: 0.9rem;
 `;
 
@@ -67,7 +67,7 @@ export const TableRow = styled.div<{ $isCurrentUser?: boolean; $rank?: number }>
   align-items: center;
   transition: all 0.2s ease;
   background: ${props => {
-    if (props.$isCurrentUser) return 'rgba(255, 200, 0, 0.15)';
+    if (props.$isCurrentUser) return 'rgba(52, 178, 123, 0.15)';
     if (props.$rank === 1) return 'rgba(255, 215, 0, 0.1)';
     if (props.$rank === 2) return 'rgba(192, 192, 192, 0.1)';
     if (props.$rank === 3) return 'rgba(205, 127, 50, 0.1)';
@@ -123,7 +123,7 @@ export const PlayerName = styled.div`
   
   .tier {
     font-size: 0.8rem;
-    color: #ffc107;
+    color: #34b27b;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -140,7 +140,7 @@ export const MMRCell = styled.div`
   text-align: center;
   font-weight: bold;
   font-size: 1.1rem;
-  color: #ffc107;
+  color: #34b27b;
 `;
 
 export const TierBadge = styled.span<{ $tier: string }>`

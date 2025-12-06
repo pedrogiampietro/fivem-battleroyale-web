@@ -16,13 +16,13 @@ const fadeIn = keyframes`
 
 const pulse = keyframes`
   0% {
-    box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7);
+    box-shadow: 0 0 0 0 rgba(52, 178, 123, 0.7);
   }
   70% {
-    box-shadow: 0 0 0 20px rgba(0, 255, 136, 0);
+    box-shadow: 0 0 0 20px rgba(52, 178, 123, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(0, 255, 136, 0);
+    box-shadow: 0 0 0 0 rgba(52, 178, 123, 0);
   }
 `;
 
@@ -41,8 +41,8 @@ const Overlay = styled.div`
 `;
 
 const ModalContent = styled.div`
-  background: linear-gradient(145deg, #1a1a2e, #16213e);
-  border: 2px solid #00ff88;
+  background: linear-gradient(145deg, #11181c, #1a2329);
+  border: 2px solid #34b27b;
   border-radius: 20px;
   padding: 50px;
   text-align: center;
@@ -52,7 +52,7 @@ const ModalContent = styled.div`
 `;
 
 const Title = styled.h1`
-  color: #00ff88;
+  color: #34b27b;
   font-size: 2.5rem;
   margin-bottom: 10px;
   text-transform: uppercase;
@@ -95,8 +95,8 @@ const InfoValue = styled.span`
 `;
 
 const ConnectButton = styled.button`
-  background: linear-gradient(135deg, #00ff88, #00cc6a);
-  color: #000;
+  background: linear-gradient(135deg, #34b27b, #248a5e);
+  color: #fff;
   border: none;
   padding: 18px 50px;
   font-size: 1.3rem;
@@ -110,7 +110,7 @@ const ConnectButton = styled.button`
   
   &:hover {
     transform: scale(1.05);
-    background: linear-gradient(135deg, #00cc6a, #00ff88);
+    background: linear-gradient(135deg, #3dc98a, #34b27b);
   }
   
   &:active {
