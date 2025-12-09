@@ -8,7 +8,6 @@ const limit = 20;
 export function apiClient() {
   const api = axios.create({
     baseURL: "http://localhost:5000/",
-    transformResponse: [],
   });
 
   api.interceptors.request.use(

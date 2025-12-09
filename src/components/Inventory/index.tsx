@@ -19,40 +19,17 @@ const tabs = [
 	{ name: 'PARAQUEDAS', icon: <FaParachuteBox /> },
 ];
 
-// Mapeamento de categorias do frontend para os IDs do FiveM
-const categoryToFiveM: Record<string, { componentId: number; isProp: boolean }> = {
-	'CALÇA': { componentId: 4, isProp: false },
-	'CAMISETA': { componentId: 8, isProp: false },
-	'JAQUETA': { componentId: 11, isProp: false },
-	'COLETE': { componentId: 9, isProp: false },
-	'CALÇADOS': { componentId: 6, isProp: false },
-	'ACESSÓRIO': { componentId: 7, isProp: false },
-	'CHAPEU': { componentId: 0, isProp: true },
-	'ÓCULOS': { componentId: 1, isProp: true },
-	'LUVA': { componentId: 7, isProp: true },
-};
-
-// Itens de exemplo - em produção viriam da API
-const defaultInventoryItems = [
-	{ id: '1', name: 'Camiseta Básica', type: 'CAMISETA', itemId: 0, textureId: 0, image: 'https://via.placeholder.com/64', rarity: 'common' },
-	{ id: '2', name: 'Camiseta Militar', type: 'CAMISETA', itemId: 15, textureId: 0, image: 'https://via.placeholder.com/64', rarity: 'rare' },
-	{ id: '3', name: 'Jaqueta Tática', type: 'JAQUETA', itemId: 14, textureId: 0, image: 'https://via.placeholder.com/64', rarity: 'epic' },
-	{ id: '4', name: 'Calça Cargo', type: 'CALÇA', itemId: 4, textureId: 0, image: 'https://via.placeholder.com/64', rarity: 'common' },
-	{ id: '5', name: 'Calça Jeans', type: 'CALÇA', itemId: 1, textureId: 0, image: 'https://via.placeholder.com/64', rarity: 'common' },
-	{ id: '6', name: 'Boné Preto', type: 'CHAPEU', itemId: 2, textureId: 0, image: 'https://via.placeholder.com/64', rarity: 'common' },
-	{ id: '7', name: 'Capacete Militar', type: 'CHAPEU', itemId: 45, textureId: 0, image: 'https://via.placeholder.com/64', rarity: 'legendary' },
-	{ id: '8', name: 'Óculos Aviador', type: 'ÓCULOS', itemId: 3, textureId: 0, image: 'https://via.placeholder.com/64', rarity: 'rare' },
-	{ id: '9', name: 'Coturno Tático', type: 'CALÇADOS', itemId: 25, textureId: 0, image: 'https://via.placeholder.com/64', rarity: 'rare' },
-	{ id: '10', name: 'Colete Balístico', type: 'COLETE', itemId: 11, textureId: 0, image: 'https://via.placeholder.com/64', rarity: 'epic' },
-];
-
+/**
+ * Interface for Inventory Item
+ */
 interface InventoryItem {
 	id: string;
 	name: string;
-	type: string;
+	type: string; // Display type (e.g. 'CALÇA')
+	category?: string; // Internal category (e.g. 'pants')
 	itemId: number;
 	textureId: number;
-	image: string;
+	image?: string;
 	rarity: string;
 	equipped?: boolean;
 }
@@ -64,13 +41,120 @@ const rarityColors: Record<string, string> = {
 	legendary: '#f59e0b',
 };
 
+// Helper to map DB categories to Folder Names in /public/assets
+const dbCategoryToFolder: Record<string, string> = {
+	'pants': 'legs',
+	'tshirt': 'tops',       // Mapping tshirt to tops based on directory analysis
+	'torso': 'tops',        // Mapping torso to tops
+	'shoes': 'shoes',
+	'hat': 'masks',         // Provisional mapping
+	'mask': 'masks',
+	'undershirt': 'undershirts',
+	'leg': 'legs',
+	'top': 'tops',
+	'shoe': 'shoes',
+};
+
+// Helper to map DB categories to Frontend Display Types
+const dbCategoryToDisplay: Record<string, string> = {
+	'pants': 'CALÇA',
+	'tshirt': 'CAMISETA',
+	'torso': 'JAQUETA',
+	'hat': 'CHAPEU',
+	'bracelet': 'LUVA',
+	'glasses': 'ÓCULOS',
+	'accessory': 'ACESSÓRIO',
+	'shoes': 'CALÇADOS',
+	'vest': 'COLETE',
+	'parachute': 'PARAQUEDAS'
+};
+
+/**
+ * Gets the image URL for an item.
+ * Priority:
+ * 1. Database `imageUrl` field (if exists and is not null/empty)
+ * 2. Local convention: /assets/[folder]/[gender]/[componentId]/[textureId].webp
+ */
+const getItemImageUrl = (item: InventoryItem) => {
+	// Prioritize local convention over DB image for now to fix legacy seed data
+	// if (item.image) return item.image;
+
+	// Determine folder name from category
+	// Use item.category (from DB) if available, otherwise lowercase item.type
+	// Fallback to strict lowercasing of DB categories if undefined
+	const categoryKey = item.category || item.type.toLowerCase();
+	const folder = dbCategoryToFolder[categoryKey] || categoryKey;
+
+	// Determine gender - defaulting to 'male' as per current assets structure check
+	// valid values: 'male', 'female'
+	// TODO: Get this from userData or PlayerAppearance if available
+	const gender = 'male';
+
+	// Convention: /assets/tops/male/11/0.webp
+	return `/assets/${folder}/${gender}/${item.itemId}/${item.textureId}.webp`;
+};
+
 export const Inventory = () => {
 	const [activeTab, setActiveTab] = useState('GERAL');
-	const [inventoryItems, setInventoryItems] = useState<InventoryItem[]>(defaultInventoryItems);
+	const [inventoryItems, setInventoryItems] = useState<InventoryItem[]>([]);
 	const [equippedItems, setEquippedItems] = useState<Record<string, string>>({});
 	const [loading, setLoading] = useState(false);
 
 	const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+
+	useEffect(() => {
+		if (userData?.id) {
+			fetchInventory();
+		} else {
+			console.warn("Inventory: No User ID found in localStorage");
+		}
+	}, [userData?.id]);
+
+	const fetchInventory = async () => {
+		try {
+			console.log("Fetching inventory for UserID:", userData.id);
+			setLoading(true);
+			// Fixed API endpoint from /clothes to /items based on backend routes
+			const response = await apiClient().get(`/appearance/user/${userData.id}/items`);
+			console.log("Inventory API Response:", response.data);
+
+			// Transform API response to InventoryItem format
+			const mappedItems: InventoryItem[] = response.data.map((entry: any) => {
+				const itemDetails = entry.item;
+				const displayType = dbCategoryToDisplay[itemDetails.category] || itemDetails.category.toUpperCase();
+
+				return {
+					id: entry.id, // PlayerClothingItem ID
+					name: itemDetails.name,
+					type: displayType,
+					category: itemDetails.category,
+					itemId: itemDetails.componentId,
+					textureId: itemDetails.textureId,
+					image: itemDetails.imageUrl, // Priority 1
+					rarity: itemDetails.rarity,
+					equipped: entry.equipped
+				};
+			});
+
+			console.log("Mapped Inventory Items:", mappedItems);
+			setInventoryItems(mappedItems);
+
+			// Set initial equipped state
+			const initialEquipped: Record<string, string> = {};
+			mappedItems.forEach(item => {
+				if (item.equipped) {
+					initialEquipped[item.type] = item.id;
+				}
+			});
+			setEquippedItems(initialEquipped);
+
+		} catch (error) {
+			console.error('Error fetching inventory:', error);
+			// toast.error('Erro ao carregar inventário.');
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	const handleTabClick = (tabName: string) => {
 		setActiveTab(tabName);
@@ -85,7 +169,7 @@ export const Inventory = () => {
 		setLoading(true);
 		try {
 			await apiClient().post(`/appearance/user/${userData.id}/equip`, {
-				category: item.type,
+				category: item.type, // Map back to DB expected category if needed, but controller seems to handle the Frontend types in `categoryMap`
 				itemId: item.itemId,
 				textureId: item.textureId,
 			});
@@ -122,7 +206,7 @@ export const Inventory = () => {
 						<span>{inventoryItems.length} itens</span>
 					</S.InventoryInfo>
 				</S.InventoryHeader>
-				
+
 				<S.TabsContainer>
 					{tabs.map((tab) => (
 						<S.Tab
@@ -137,27 +221,38 @@ export const Inventory = () => {
 				</S.TabsContainer>
 
 				<S.InventoryGrid>
-					{filteredItems.length > 0 ? (
-						filteredItems.map((item) => (
-							<S.InventorySlot 
-								key={item.id} 
-								$rarity={item.rarity}
-								$equipped={isItemEquipped(item)}
-								onClick={() => handleEquipItem(item)}
-							>
-								{isItemEquipped(item) && (
-									<S.EquippedBadge>EQUIPADO</S.EquippedBadge>
-								)}
-								<S.RarityIndicator $color={rarityColors[item.rarity]} />
-								<S.ItemImage src={item.image} alt={item.name} />
-								<S.ItemName>{item.name}</S.ItemName>
-								<S.ItemCategory>{item.type}</S.ItemCategory>
-							</S.InventorySlot>
-						))
+					{loading && filteredItems.length === 0 ? (
+						<div style={{ padding: '2rem', color: '#fff' }}>Carregando inventário...</div>
 					) : (
-						<S.EmptyState>
-							<p>Nenhum item encontrado nesta categoria.</p>
-						</S.EmptyState>
+						filteredItems.length > 0 ? (
+							filteredItems.map((item) => (
+								<S.InventorySlot
+									key={item.id}
+									$rarity={item.rarity}
+									$equipped={isItemEquipped(item)}
+									onClick={() => handleEquipItem(item)}
+								>
+									{isItemEquipped(item) && (
+										<S.EquippedBadge>EQUIPADO</S.EquippedBadge>
+									)}
+									<S.RarityIndicator $color={rarityColors[item.rarity]} />
+									<S.ItemImage
+										src={getItemImageUrl(item)}
+										alt={item.name}
+										onError={(e) => {
+											// Fallback if image fails to load
+											(e.target as HTMLImageElement).src = '/assets/placeholder.png';
+										}}
+									/>
+									<S.ItemName>{item.name}</S.ItemName>
+									<S.ItemCategory>{item.type}</S.ItemCategory>
+								</S.InventorySlot>
+							))
+						) : (
+							<S.EmptyState>
+								<p>Nenhum item encontrado nesta categoria.</p>
+							</S.EmptyState>
+						)
 					)}
 				</S.InventoryGrid>
 			</S.ContentContainer>

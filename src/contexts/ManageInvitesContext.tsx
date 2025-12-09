@@ -61,7 +61,7 @@ export const GroupRequestProvider: React.FC<PropsI> = ({ children }) => {
         `/group/groupOfUser/${userData.id}`
       );
 
-      const data = JSON.parse(response.data);
+      const data = response.data;
 
       setGroup(data.group);
 
@@ -93,7 +93,7 @@ export const GroupRequestProvider: React.FC<PropsI> = ({ children }) => {
 
     try {
       const response = await apiClient().get(`/group/invites/${userData.id}`);
-      const apiInvites = JSON.parse(response.data);
+      const apiInvites = response.data;
 
       setGroupRequests(apiInvites);
     } catch (error) {
